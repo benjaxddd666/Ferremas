@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Carrito de Compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let producto of productos">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="producto.imagen"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{producto.nombre}}</h2>
+        <p>Precio: ${{producto.precio}}</p>
+        <ion-button fill="clear" color="danger" (click)="eliminarProducto(producto.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-label>
+      <ion-input type="number" [value]="producto.cantidad" (ionChange)="actualizarCantidad(producto.id, $event.detail.value ? +$event.detail.value : 1)"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label>Subtotal</ion-label>
+        <ion-note slot="end">${{ total }}</ion-note>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Total</ion-label>
+        <ion-note slot="end">${{ total }}</ion-note>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Código de Descuento</ion-label>
+        <ion-input placeholder="Ingrese código"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="primary">Aplicar Cupón</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" class="ion-margin-top" (click)="procederAlPago()">
+    Proceder al Pago
+  </ion-button>
+</ion-content>

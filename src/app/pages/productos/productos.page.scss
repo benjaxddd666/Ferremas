@@ -1,0 +1,42 @@
+.product-card {
+  // Reduce el margen o padding si es necesario
+  margin: 5px;
+  height: 100%; // Asegura que las tarjetas tengan altura consistente si usas flexbox
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Empuja el botón hacia abajo
+}
+
+
+
+.product-image {
+  max-height: 250px; // Aumentado de 125px a 250px (200% más grande)
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.product-title {
+  font-size: 0.9em; // Reduce el tamaño de la fuente del título
+  white-space: normal; // Permite que el texto se ajuste en varias líneas
+  min-height: 2.4em; // Reserva espacio para dos líneas de título
+}
+
+.product-description {
+  font-size: 0.8em; // Reduce el tamaño de la fuente de la descripción
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // Limita la descripción a 2 líneas
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+
+ion-card-content {
+  padding-top: 0;
+  padding-bottom: 5px;
+}
+
+ion-button {
+  font-size: 0.8em; // Reduce el tamaño del botón
+  margin-top: auto; // Asegura que el botón esté al final
+}

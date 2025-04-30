@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/carrito"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Información de Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Segmento para elegir método de pago -->
+  <ion-segment [(ngModel)]="metodoPagoSeleccionado" (ionChange)="metodoCambiado($event)">
+    <ion-segment-button value="tarjeta">
+      <ion-label>Tarjeta Débito/Crédito</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="transferencia">
+      <ion-label>Transferencia</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Formulario de Tarjeta (visible solo si se selecciona 'tarjeta') -->
+  <form [formGroup]="paymentForm" (ngSubmit)="procesarPago()" *ngIf="metodoPagoSeleccionado === 'tarjeta'" class="ion-margin-top">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre en la Tarjeta</ion-label>
+        <ion-input formControlName="nombreTarjeta" type="text" placeholder="Nombre completo"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="paymentForm.get('nombreTarjeta')?.invalid && paymentForm.get('nombreTarjeta')?.touched">
+        <p class="ion-padding-start">El nombre es requerido.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Número de Tarjeta</ion-label>
+        <ion-input formControlName="numeroTarjeta" type="tel" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="paymentForm.get('numeroTarjeta')?.invalid && paymentForm.get('numeroTarjeta')?.touched">
+         <p class="ion-padding-start">Número de tarjeta inválido.</p>
+      </ion-text>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Fecha Expiración</ion-label>
+            <ion-input formControlName="fechaExp" type="text" placeholder="MM/AA" maxlength="5"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="paymentForm.get('fechaExp')?.invalid && paymentForm.get('fechaExp')?.touched">
+            <p class="ion-padding-start">Fecha inválida (MM/AA).</p>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">CVV</ion-label>
+            <ion-input formControlName="cvv" type="tel" inputmode="numeric" placeholder="123" maxlength="4"></ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched">
+            <p class="ion-padding-start">CVV inválido.</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" [disabled]="paymentForm.invalid" class="ion-margin-top">
+      Pagar con Tarjeta
+    </ion-button>
+  </form>
+
+  <!-- Mensaje para Transferencia (visible solo si se selecciona 'transferencia') -->
+  <div *ngIf="metodoPagoSeleccionado === 'transferencia'" class="ion-margin-top ion-padding ion-text-center" style="border: 1px solid var(--ion-color-medium); border-radius: 5px;">
+    <p>Para pagar con transferencia, por favor transfiera el monto total a la siguiente cuenta:</p>
+    <p><strong>Banco:</strong> Banco Ejemplo<br>
+       <strong>Tipo de Cuenta:</strong> Cuenta Corriente<br>
+       <strong>Número:</strong> 123-456-7890<br>
+       <strong>RUT:</strong> 99.999.999-9<br>
+       <strong>Nombre:</strong> Ferretería XYZ<br>
+       <!-- Reemplaza @ con &#64; -->
+       <strong>Email:</strong> pagos&#64;ferreteriaxyz.cl</p>
+    <p>Una vez realizada la transferencia, envíe el comprobante a nuestro correo.</p>
+    <ion-button expand="block" (click)="procesarPago()" class="ion-margin-top">
+      Confirmar Transferencia (Simulación)
+    </ion-button>
+  </div>
+</ion-content>

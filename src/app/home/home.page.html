@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      FERREMAS
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/carrito">
+        <ion-icon name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- UN SOLO ion-content -->
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Banner Principal -->
+  <div class="banner-container">
+    <div class="banner-text">
+      <div class="texto-con-fondo">
+        <h1>Encuentra lo que necesitas para construir tus proyectos</h1>
+        <p>Calidad y variedad en herramientas y materiales</p>
+      </div>
+      <ion-button expand="block" routerLink="/productos">Ver Catálogo</ion-button>
+    </div>
+  </div>
+
+  <!-- Bienvenida -->
+  <div class="ion-padding">
+    <ion-card>
+      <ion-img src="assets/img/imagenes/Banner_Ferremas.png"></ion-img>
+      <ion-card-header>
+        <ion-card-title>Bienvenido a FERREMAS</ion-card-title>
+        <ion-card-subtitle>Tu ferretería de confianza</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Encuentra todo lo que necesitas para tus proyectos de construcción y renovación en un solo lugar.</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Servicios -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nuestros Servicios</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="hammer-outline" slot="start"></ion-icon>
+            <ion-label>Herramientas Eléctricas y Manuales</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="construct-outline" slot="start"></ion-icon>
+            <ion-label>Materiales de Construcción</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+            <ion-label>Equipos de Seguridad</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Clima -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Clima</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <form (submit)="getWeather($event)">
+          <ion-item>
+            <ion-label>Ciudad</ion-label>
+            <ion-select [(ngModel)]="selectedCity" name="city" interface="popover" placeholder="Seleccione una ciudad">
+              <ion-select-option value="Santiago,CL">Santiago, Chile</ion-select-option>
+              <ion-select-option value="Rancagua,CL">Rancagua, Chile</ion-select-option>
+              <ion-select-option value="Viña del Mar,CL">Viña del mar, Chile</ion-select-option>
+              <ion-select-option value="Puerto Montt,CL">Puerto Montt, Chile</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button expand="block" type="submit">Obtener Clima</ion-button>
+        </form>
+
+        <!-- Resultado Clima -->
+        <div *ngIf="weatherResult" class="weather-content">
+          <h2>Clima en {{ weatherResult.name }}</h2>
+      
+          <img [src]="'https://openweathermap.org/img/wn/' + weatherResult.weather[0].icon + '@2x.png'" alt="Icono del clima">
+          <p><strong>Temperatura:</strong> {{ weatherResult.main.temp }}°C</p>
+          <p><strong>Mínima:</strong> {{ weatherResult.main.temp_min }}°C | <strong>Máxima:</strong> {{ weatherResult.main.temp_max }}°C</p>
+          <p><strong>Condición:</strong> {{ weatherResult.weather[0].description }}</p>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

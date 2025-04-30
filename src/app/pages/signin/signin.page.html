@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-img src="assets/img/logo.jpg" style="width: 100px;"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-img src="assets/img/logo.jpg" style="width: 100px; margin: auto;"></ion-img>
+      <ion-card-title class="ion-text-center">Registro</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="signinForm.get('email')?.touched && signinForm.get('email')?.errors?.['required']">
+          El correo electrónico es requerido
+        </div>
+        <div class="error-message" *ngIf="signinForm.get('email')?.touched && signinForm.get('email')?.errors?.['email']">
+          Ingrese un correo electrónico válido
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.errors?.['required']">
+          La contraseña es requerida
+        </div>
+        <div class="error-message" *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.errors?.['minlength']">
+          La contraseña debe tener al menos 10 caracteres
+        </div>
+
+        <ion-item>
+          <ion-checkbox formControlName="terms"></ion-checkbox>
+          <ion-label>Acepto los términos y condiciones</ion-label>
+        </ion-item>
+        <div class="error-message" *ngIf="signinForm.get('terms')?.touched && signinForm.get('terms')?.errors?.['required']">
+          Debes aceptar los términos y condiciones
+        </div>
+
+        <ion-button expand="block" color="primary" type="submit" [disabled]="!signinForm.valid">
+          Registrarse
+        </ion-button>
+
+        <div class="ion-text-center ion-padding-top">
+          <ion-text>¿Ya tienes una cuenta?</ion-text>
+          <br>
+          <ion-router-link color="primary" routerLink="/login">
+            Inicia sesión aquí
+          </ion-router-link>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content> 
