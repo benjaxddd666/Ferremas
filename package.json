@@ -1,5 +1,5 @@
 {
-  "name": "projecto-Integracion",
+  "name": "projecto-integracion",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -27,8 +27,11 @@
     "@capacitor/keyboard": "7.0.1",
     "@capacitor/status-bar": "7.0.1",
     "@ionic/angular": "^8.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
+    "transbank-sdk": "^6.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.0"
   },
@@ -60,5 +63,9 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "main": "karma.conf.js",
+  "keywords": [],
+  "license": "ISC",
+  "type": "commonjs"
 }
