@@ -10,6 +10,9 @@ Abre una terminal en la carpeta raíz del proyecto y ejecuta:
 
 ```bash
 npm install
+npm install -g @ionic/cli
 npm install -g @angular/cli
 npm install --legacy-peer-deps
+
+# Ferremas
 
